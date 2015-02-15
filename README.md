@@ -7,9 +7,9 @@ Le funzioni sono "first-class citiziens", hanno scoping lessicale e possono esse
 dichiarate all'interno di altre funzioni. Vengono dichiarate attraverso la
 keyword "function".
 
-Il linguaggio include classici statements come var, for, while, continue, break e
-return e funzionano in maniera analoga ad altri linguaggi di programmazione. Inoltre
-inclue le funzioni "eval" e "distributed_eval", le quali valutano il codice TinyJs
+Il linguaggio include statements come var, for, while, continue, break e
+return, i quali funzionano in maniera analoga ad altri linguaggi di programmazione. Inoltre
+include le funzioni "eval" e "distributed_eval", le quali valutano il codice TinyJs
 rappresentato come una stringa. La specifica delle due funzioni si trova in PA-feb-15.pdf
 
 Si consiglia la visione della sezione "Esempi" per una maggiore comprensione del
