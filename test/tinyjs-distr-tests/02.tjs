@@ -1,0 +1,9 @@
+var u = "http://127.0.0.1:1337";
+var code0 = "function sum(a,b){return a+b;}";
+var code1 = "var a = 5; var b = 6;";
+var code2 = "var x=5; var y=6; function sum(a,b) { return a+b;} >> sum(x,y);";
+
+var res = distributed_eval(code2,u);
+println(res);
+res = distributed_eval(" >> sum(59,243);", u);
+println(res);

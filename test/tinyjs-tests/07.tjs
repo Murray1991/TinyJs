@@ -1,0 +1,31 @@
+function executor(fun, par) { 
+	return fun(par);
+}
+
+function returnFive() {
+	return 5;	
+}
+
+var b = returnFive;
+println(executor(returnFive)); //5
+println(executor(b)); //5
+
+// function counter with extra formal parameters
+function counter(init, pippo, topolino, minnie) {
+	var count = init;
+	function incr(value) {
+		count += value;
+		return count;
+	}
+	return incr;
+};
+
+var i = executor(counter,executor(b));
+var j = executor(counter,executor(b));
+
+for ( var k = j(0) ; j(0) < 10; k=j(1) ){
+	>> eval(">> i(5);");
+}
+
+println(j(0)); //10
+println(i(0)); //30

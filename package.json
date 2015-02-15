@@ -1,0 +1,31 @@
+{
+  "name": "TinyJs",
+  "version": "0.1.0",
+  "description": "TinyJs is a simple didactic language based on javascript",
+  "main": "tinyjs.js",
+  "scripts": {
+    "test": "npm run tiny-test && npm run tiny-distr-test && npm run tiny-wrong-test",
+    "server": "npm run start-server",
+    "start-server": "node ./src/distribute/server.js",
+    "tiny-test": "node tinyjs.js --dir ./test/tinyjs-tests",
+    "tiny-distr-test": "node tinyjs.js --dir ./test/tinyjs-distr-tests",
+    "tiny-wrong-test": "node tinyjs.js --dir ./test/tinyjs-wrong-tests"
+  },
+  "repository": "",
+  "engines": {
+	"node": "0.10.36"  
+  },
+  "keywords": [
+    "TinyJs",
+    "node.js",
+    "eclipse",
+    "nodeclipse"
+  ],
+  "dependencies": {
+	"sync-request": "2.0.0",
+	"minimist": "1.1.0",
+	"querystring": "0.2.0"
+  },
+  "author": "Leonardo Gazzarri <leogazza91@gmail.com>",
+  "readmeFilename": "README.md"
+}

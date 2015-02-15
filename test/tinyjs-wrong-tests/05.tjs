@@ -1,0 +1,10 @@
+function a() {
+	var b = 0;
+	if (b==0) {
+		continue;
+	}
+	return b;
+}
+
+var c = a();
+println(c);

@@ -1,0 +1,21 @@
+// function greet knows only italian, english and french
+function greet (greeting) {
+	switch (greeting) {
+		case 'ciao':
+		case 'hello':
+		case 'salut':
+			return greeting;
+		default:
+			return "sorry, I don't understand";
+	}
+}
+
+var ita = 'ciao';
+var eng = 'hello';
+var fr = 'salut';
+var sp = 'hola';
+
+println(greet(ita));
+println(greet(eng));
+println(greet(fr));
+println(greet(sp));

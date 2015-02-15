@@ -1,0 +1,60 @@
+// switch case statements
+
+// Two persons in a room, the first says something
+var ping = "hello";
+println(ping+'!');
+switch (ping) {
+	case 'ciao':
+		var pong = ping;
+		break;
+	case 'hello':
+		var pong = ping;
+		break;
+	case 'salut':
+		var pong = ping;
+		break;
+	default:
+		var pong = "sorry, I know only italian, english and french";
+		break;
+}
+println(pong+'!!');
+
+println(""); //a newline..
+
+// Some linguists are in the same room
+// someone says something:
+var ping = "ciao";
+var pong = '';
+println(ping+'!');
+switch (ping) {
+	case 'ciao':
+		pong += 'ciao' + ' ';
+	case 'hello':
+		pong += 'hello' + ' ';
+	case 'salut':
+		pong += 'salut' + ' ';
+		break;
+	default:
+		// only one knows the difficult word...
+		pong += ping;
+		break;
+}
+println(pong+'!!');
+
+println(""); //a newline..
+
+// Some linguists are in the same room, someone says something
+var ping = "ciao";
+var pong = "";
+println(ping+'!');
+switch (ping) {
+	case 'ciao':
+	case 'hello':
+	case 'salut':
+		pong += ping + ' ';
+		break;
+	default:
+		pong += ping +'~';
+		break;
+}
+println(pong+'!!');

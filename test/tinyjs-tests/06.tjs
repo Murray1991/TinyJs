@@ -1,0 +1,31 @@
+// function counter with extra formal parameters
+function counter(init, pippo, claudio, luigi) {
+	var count = init;
+	function incr(value) {
+		count += value;
+		return count;
+	}
+	return incr;
+};
+
+var c1 = counter(5, 5, 6, 7, "fd", "fddd"); //extra actual parameters are ignored
+var c2 = counter(15);
+
+var c1Str = "";
+var c2Str = "";
+
+var j = c2(0);
+for (var i= c1(0); i < j; ) {
+	i = c1(1); c1Str += c1(0) + ' ';
+	j = c2(-1); c2Str += c1(0) + ' ';
+}
+
+println("i and j are equal? " + (i==j));
+println(c1Str + c2Str);
+
+>> c2(0-c2(0)); //resetting 0
+
+for (var i = 0; i < c1(0); i+=1) {
+	c2Str += c2(i) + ' ';
+}
+println(c1Str + c2Str);

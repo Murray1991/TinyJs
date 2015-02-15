@@ -1,0 +1,5 @@
+var u = "http://127.0.0.1:1337";
+>> distributed_eval("function mult(a,b) { return a*b; }", u );
+
+println( distributed_eval("var res = mult(43,3); >> res;",u));
+println("done");

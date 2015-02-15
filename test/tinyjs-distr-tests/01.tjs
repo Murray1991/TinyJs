@@ -1,0 +1,5 @@
+var u ="http://127.0.0.1:1337";
+var a = distributed_eval(">> 5+5+5+5;",u);
+
+println(a);
+println(distributed_eval(">> sum(4,55);",u);

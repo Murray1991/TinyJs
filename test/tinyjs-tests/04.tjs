@@ -1,0 +1,41 @@
+println("iteration tests");
+
+var concat = "";
+for (var i=0; i<=10; i+=1) {
+	concat += i + ' ';
+	println(i);
+}
+println(concat);
+
+var reverse_concat = "";
+while(i>0) {
+	i -= 1;
+	if (i==5) {
+		println("five will not be concatenated");
+		continue;
+	}
+	reverse_concat += i + ' ';
+}
+println(reverse_concat);
+
+println(""); //newline
+
+concat = "";
+for ( i=0; i<10; i+=1){
+	var sum = 0;
+	for ( var j = i; j>0; j-=1) {
+		sum += j;
+	}
+	concat += sum + " ";
+}
+println(concat);
+
+println(""); //newline
+
+for (i=0; i<10; i+=1) {
+	if (i==5) {
+		println("five will not be printed");
+		continue;
+	}
+	println(i);
+}

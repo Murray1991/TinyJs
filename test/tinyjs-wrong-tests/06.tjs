@@ -1,0 +1,8 @@
+println(true);
+var a = true;
+var b = 5;
+var c = " end";
+
+println(a+c);
+println(b+c);
+println(a+b);

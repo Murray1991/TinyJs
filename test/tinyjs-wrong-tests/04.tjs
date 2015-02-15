@@ -1,0 +1,7 @@
+function a() {
+	var b = 0;
+	return ;
+}
+
+var c = a();
+println(c);

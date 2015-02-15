@@ -1,0 +1,68 @@
+var types;
+(function (types) {
+    (function (SyntaxType) {
+        var s = SyntaxType;
+        s[s["EqualsToken"] = 0] = "EqualsToken";
+        s[s["EqualsEqualsToken"] = 1] = "EqualsEqualsToken";
+        s[s["ExclamationToken"] = 2] = "ExclamationToken";
+        s[s["ExclamationEqualsToken"] = 3] = "ExclamationEqualsToken";
+        s[s["OpenParenToken"] = 4] = "OpenParenToken";
+        s[s["CloseParenToken"] = 5] = "CloseParenToken";
+        s[s["OpenBraceToken"] = 6] = "OpenBraceToken";
+        s[s["CloseBraceToken"] = 7] = "CloseBraceToken";
+        s[s["OpenBracketToken"] = 8] = "OpenBracketToken";
+        s[s["CloseBracketToken"] = 9] = "CloseBracketToken";
+        s[s["LessToken"] = 10] = "LessToken";
+        s[s["GreaterToken"] = 11] = "GreaterToken";
+        s[s["LessEqualsToken"] = 12] = "LessEqualsToken";
+        s[s["GreaterEqualsToken"] = 13] = "GreaterEqualsToken";
+        s[s["PlusToken"] = 14] = "PlusToken";
+        s[s["AsteriskToken"] = 15] = "AsteriskToken";
+        s[s["MinusToken"] = 16] = "MinusToken";
+        s[s["SlashToken"] = 17] = "SlashToken";
+        s[s["CommaToken"] = 18] = "CommaToken";
+        s[s["SemicolonToken"] = 19] = "SemicolonToken";
+        s[s["EOFToken"] = 20] = "EOFToken";
+        s[s["PlusEqualsToken"] = 21] = "PlusEqualsToken";
+        s[s["MinusEqualsToken"] = 22] = "MinusEqualsToken";
+        s[s["AsteriskEqualsToken"] = 23] = "AsteriskEqualsToken";
+        s[s["SlashEqualsToken"] = 24] = "SlashEqualsToken";
+        s[s["MinusMinusToken"] = 25] = "MinusMinusToken";
+        s[s["PlusPlusToken"] = 26] = "PlusPlusToken";
+        s[s["NewLineToken"] = 27] = "NewLineToken";
+        s[s["AmpersandAmpersandToken"] = 28] = "AmpersandAmpersandToken";
+        s[s["BarBarToken"] = 29] = "BarBarToken";
+        s[s["GreaterGreaterToken"] = 30] = "GreaterGreaterToken";
+        s[s["ColonToken"] = 31] = "ColonToken";
+
+        s[s["BoolLiteral"] = 32] = "BoolLiteral";
+        s[s["StringLiteral"] = 33] = "StringLiteral";
+        s[s["IntegerLiteral"] = 34] = "IntegerLiteral";
+        s[s["Identifier"] = 35] = "Identifier";
+
+        s[s["DistributedEvalKeyWord"] = 40] = "DistributedEvalKeyWord";
+        s[s["BoolKeyWord"] = 41] = "BoolKeyWord";
+        s[s["UndefinedKeyWord"] = 42] = "UndefinedKeyWord";
+        s[s["ElseKeyWord"] = 43] = "ElseKeyWord";
+        s[s["FunKeyWord"] = 44] = "FunKeyWord";
+        s[s["FalseKeyWord"] = 45] = "FalseKeyWord";
+        s[s["ForKeyWord"] = 46] = "ForKeyWord";
+        s[s["IfKeyWord"] = 47] = "IflseKeyWord";
+        s[s["IntKeyWord"] = 48] = "IntKeyWord";
+        s[s["EvalKeyWord"] = 49] = "EvalKeyWord";
+        s[s["VarKeyWord"] = 50] = "VarKeyWord";
+        s[s["TrueKeyWord"] = 51] = "TrueKeyWord";
+        s[s["WhileKeyWord"] = 52] = "WhileKeyWord";
+        s[s["PrintlnKeyWord"] = 53] = "PrintlnKeyWord";
+        s[s["ReturnKeyWord"] = 54] = "ReturnKeyWord";
+        s[s["StringKeyWord"] = 55] = "StringKeyWord";
+        s[s["BreakKeyWord"] = 56] = "BreakKeyWord";
+        s[s["ContinueKeyWord"] = 57] = "ContinueKeyWord";
+        s[s["SwitchKeyWord"] = 58] = "SwitchKeyWord";
+        s[s["CaseKeyWord"] = 59] = "CaseKeyWord";
+        s[s["DefaultKeyWord"] = 60] = "DefaultKeyWord";   
+    })(types.SyntaxType || (types.SyntaxType = {}));
+    var SyntaxType = types.SyntaxType;
+})(types || (types = {}));
+
+module.exports = types;

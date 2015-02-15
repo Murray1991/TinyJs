@@ -1,0 +1,37 @@
+println("arithmetic tests:");
+
+var a = (4+5+6)*7 - 24*(4) + 4*(1-1+1-2+1);
+println("a = (4+5+6)*7 - 24*(4) + 4*(1-1+1-2+1) = "+a);
+var b = 4+5;
+println("b = 4+5 = "+b);
+var c = 4*(4-5+6-4+5);
+println("c = 4*(4-5+6-4+5) = "+c);
+var d = 4-(5+6);
+println("d = 4-(5+6)="+d);
+var e = 4 - 3 -2 -1;
+println("e = 4 - 3 -2 -1 = "+e);
+var f = 4/3;
+println("f = 4/3 = "+f);
+var g = f + 1;
+println("g = f + 1 = "+g);
+var h = -g + -3 +(-c);
+println("h = -g + -3 +(-c) = "+h);
+
+println("associativity for mul expressions has to be handled by programmer...");
+var i = 6*3/3*3;
+println("wrong 6*3/3*3 = "+i);
+var l = ((6*3)/3)*3;
+println("correct ((6*3)/3)*3 = " + l);
+
+a = b == 9;
+println("a = b == 9 = "+a);
+b = b<10 && a;
+println("b = b<10 && a = "+b);
+c = !b;
+println("c = !b = "+c);
+d = c || a;
+println("d = b || a = "+d);
+e = c && a;
+println("e = b && a = "+e);
+f = c && a || c || !b;
+println("f = c && a || c || !b = "+f);

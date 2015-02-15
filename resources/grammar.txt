@@ -1,0 +1,216 @@
+<program> ::=
+	<elements> #Program($$,$1)
+
+<elements> ::=
+	<element> #AppendParams($$,$1,$2) <elements> #Copy($2,$$)
+	$
+
+<element> ::=
+	<function> #Copy($1,$$)
+	<stmt> #Copy($1,$$)
+
+<id> ::=
+	<identifier> #Identifier($$,$1)
+
+<function> ::=
+	function <id> <params> <func-body> #Function($$,$2,$3,$4)
+
+<func-body> ::=
+	{ <elements> } #Copy($2,$$)
+
+<params> ::=
+	( <params-list> ) #FormalParams($$,$2)
+
+<params-list> ::=
+	<id> #Copy($1,$2) <params-tail> #Copy($2,$$)
+	$
+
+<params-tail> ::=
+	, <id> #AppendParams($$,$2,$3) <params-tail> #Copy($3,$$)
+	$
+
+<stmt> ::=
+	<var-stmt> ; #Copy($1,$$)
+	<assign-stmt> ; #Copy($1,$$)
+	<if-stmt> #Copy($1,$$)
+	<iteration-stmt> #Copy($1,$$)
+	<empty-stmt> #Copy($1,$$)
+	<println-stmt> #Copy($1,$$)
+	<return-stmt> #Copy($1,$$)
+	<continue-stmt> ; #Copy($1,$$)
+	<break-stmt> ; #Copy($1,$$)
+	>> <exp> ; #Expression($$,$2)
+
+<stmt-aux> ::=
+	<stmt> #Copy($1,$$)
+	<block-stmt> #Copy($1,$$)
+
+<block-stmt> ::=
+	{ <stmt-list> } #Copy($2,$$)
+
+<stmt-list> ::=
+	<stmt> #AppendParams($$,$1,$2) <stmt-list> #Copy($2,$$)
+	$
+
+<continue-stmt> ::=
+	continue #Continue($$)
+
+<break-stmt> ::=
+	break #Break($$)
+
+<var-stmt> ::=
+	var <id> <var-stmt-tail> #Declaration($$,$2,$3)
+
+<var-stmt-tail> ::=
+	= <exp> #Copy($2,$$)
+	$
+
+<assign-stmt> ::=
+	<id> <assign-tokens> <exp> #Assignment($$,$1,$2,$3)
+
+<assign-tokens> ::=
+	= #Copy($1,$$)
+	+= #Copy($1,$$)
+	-= #Copy($1,$$)
+	*= #Copy($1,$$)
+	/= #Copy($1,$$)
+
+<if-stmt> ::=
+	if ( <exp> ) <block-stmt> <else> #IfThenElse($$,$3,$5,$6)
+
+<else> ::=
+	else <stmt-aux> #Copy($2,$$)
+	$
+
+<iteration-stmt> ::=
+	for ( <init> ; <cond> ; <update> ) <stmt-aux> #ForLoop($$,$3,$5,$7,$9)
+	while ( <cond> ) <stmt-aux> #WhileLoop($$,$3,$5)
+	switch ( <cond> ) { <case-list> <default> } #SwitchCase($$,$3,$6,$7)
+
+<case-list> ::=
+	<case> #AppendParams($$,$1,$2) <case-list> #Copy($2,$$)
+	$
+
+<case> ::=
+	case <cond> : <stmt-list> #Case($$,$2,$4)
+
+<default> ::=
+	default : <stmt-list> #Default($$,$3)
+	$
+
+<init> ::=
+	<var-stmt> #Copy($1,$$)
+	<assign-stmt> #Copy($1,$$)
+	$
+
+<cond> ::=
+	<exp> #Copy($1,$$)
+	$
+
+<update> ::=
+	<assign-stmt> #Copy($1,$$)
+	$
+
+<empty-stmt> ::=
+	;
+
+<println-stmt> ::=
+	println ( <exp> ) ; #Println($$,$3)
+
+<return-stmt> ::=
+	return <exp> ; #Return($$,$2)
+
+<exp-literal> ::=
+	<int-literal> #IntLiteral($$,$1)
+	<bool-literal> #BoolLiteral($$,$1)
+	<string-literal> #StringLiteral($$,$1)
+	undefined #UndefinedLiteral($$,$1)
+
+<primary-exp> ::=
+	<id> <application> #IdentifierExp($$,$1,$2)
+	<exp-literal> #Copy($1,$$)
+	<eval> #Copy($1,$$)
+	<dval> #Copy($1,$$)
+	( <exp> ) #ComplexExp($$,$2)
+
+<eval> ::=
+	eval ( <eval-body> ) #Eval($$,$3)
+
+<dval> ::=
+	distributed_eval ( <eval-body> , <eval-body> ) #DEval($$,$3,$5)
+
+<eval-body> ::=
+	<exp> #Copy($1,$$)
+
+<application> ::=
+	<args> #Copy($1,$$)
+	$
+
+<args> ::=
+	( <args-list> ) #ActualParams($$,$2)
+
+<args-list> ::=
+	<exp> #Copy($1,$2) <args-list-tail> #Copy($2,$$)
+	$
+
+<args-list-tail> ::=
+	, <exp> #AppendParams($$,$2,$3) <args-list-tail> #Copy($3,$$)
+	$
+
+<unitary-exp> ::=
+	<primary-exp> #Copy($1,$$)
+	+ <unitary-exp> #UnitaryExp($$,$1,$2)
+	- <unitary-exp> #UnitaryExp($$,$1,$2)
+	! <unitary-exp> #UnitaryExp($$,$1,$2)
+
+<mult-exp> ::=
+	<unitary-exp> #Copy($1,$2) <mult-exp-tail> #Copy($2,$$)
+
+<mult-exp-tail> ::=
+	* <mult-exp> #MulExp($$,$1,$2)
+	/ <mult-exp> #MulExp($$,$1,$2)
+	$
+
+<add-exp> ::=
+	<mult-exp> #Copy($1,$2) <add-exp-tail> #Copy($2,$$)
+
+<add-exp-tail> ::=
+	+ <add-exp> #AddExp($$,$1,$2)
+	- <add-exp> #AddExp($$,$1,$2)
+	$
+
+<rel-exp> ::=
+	<add-exp> #Copy($1,$2) <rel-exp-tail> #Copy($2,$$)
+
+<rel-exp-tail> ::=
+	< <rel-exp> #RelExp($$,$1,$2)
+	> <rel-exp> #RelExp($$,$1,$2)
+	<= <rel-exp> #RelExp($$,$1,$2)
+	>= <rel-exp> #RelExp($$,$1,$2)
+	$
+
+<eq-exp> ::=
+	<rel-exp> #Copy($1,$2) <eq-exp-tail> #Copy($2,$$)
+
+<eq-exp-tail> ::=
+	== <eq-exp> #EqExp($$,$1,$2)
+	!= <eq-exp> #EqExp($$,$1,$2)
+	$
+
+<and-exp> ::=
+	<eq-exp> #Copy($1,$2) <and-exp-tail> #Copy($2,$$)
+
+<and-exp-tail> ::=
+	&& <and-exp> #AndExp($$,$1,$2)
+	$
+
+<or-exp> ::=
+	<and-exp> #Copy($1,$2) <or-exp-tail> #Copy($2,$$)
+
+<or-exp-tail> ::=
+	|| <or-exp> #OrExp($$,$1,$2)
+	$
+
+<exp> ::=
+	<or-exp> #Copy($1,$$)
+
