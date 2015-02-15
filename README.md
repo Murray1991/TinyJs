@@ -134,15 +134,15 @@ ulteriormente la grammatica del linguaggio facendo left-factoring sugli identifi
 produzioni per l'assegnamento e per le espressioni
 
 ## Problemi
-- Il parser LL(1) genera AST che sono right associative, nonostante la precedenza fra gli
-operatori sia soddisfatta e io abbia (presumo correttamente) risolto il problema di associativita' 
+- Il parser LL(1) genera AST che sono right associative. Nonostante la precedenza fra gli
+operatori sia soddisfatta ed io abbia (presumo correttamente) risolto il problema di associativita' 
 per le espressioni addittive in cui sono presenti sottrazioni (facendo 'forwarding del -', vedere 
 implementazione per dettagli), non e' stato risolto il problema per le espressioni moltiplicative.
 Sfortunatamente il programmatore DEVE in caso di divisioni gestire l'associativita' con le parentesi.
 - Il server che gestisce le richieste per la funzione "distributed_eval" e' un semplice server
 costruito sopra Node.js, poiche' e' single-threaded puo' bloccare gli altri client su una 
 richiesta CPU-intensive. Nello scenario peggiore si puo' bloccare per un tempo indefinitivamente
-lungo (per esempio: distributed_eval("while(true){}",url) );
+lungo (per esempio: ```distributed_eval("while(true){};",url)``` );
 - Nella computazione su network, gli unici tipi di dato scambiati sono tipi primitivi.
 - Il server mantiene in modo permanente un ambiente per ogni indirizzo IP, evidente fonte di
 insicurezza.
