@@ -127,7 +127,7 @@ println(j(0)); //10
 println(i(0)); //30
 ```
 Come si puo' notare dall'esempio il primo compromesso con la scelta di implementare un
-parser LL(1), e' quella di utilizzare una sintassi diversa ('>> expr;') per le espressioni 
+parser LL(1) e' quella di utilizzare una sintassi diversa ('>> expr;') per le espressioni 
 che non sono a destra di un assegnamento o che non sono usate come parametri attuali
 nella chiamata di una funzione. Questo compromesso nasce dal fatto che non volevo complicare
 ulteriormente la grammatica del linguaggio facendo left-factoring sugli identificatori nelle
