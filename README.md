@@ -155,5 +155,4 @@ insicurezza.
 e salvarla in un file json in ./resources.
 
 ## Ambiente
-Testato su macchina linux e creato con Nodeclipse.
-[Nodeclipse](https://github.com/Nodeclipse/nodeclipse-1)
+Testato su macchina linux e creato con [Nodeclipse](https://github.com/Nodeclipse/nodeclipse-1).
