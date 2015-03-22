@@ -12,7 +12,7 @@
 <id> ::=
 	<identifier> #Identifier($$,$1)
 
-<function> ::=
+<function> ::= 
 	function <id> <params> <func-body> #Function($$,$2,$3,$4)
 
 <func-body> ::=
@@ -213,4 +213,4 @@
 
 <exp> ::=
 	<or-exp> #Copy($1,$$)
-
+	
