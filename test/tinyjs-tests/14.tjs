@@ -1,0 +1,26 @@
+function g() {
+	return 5;
+}
+
+function x() {
+	return g;
+}
+
+function b () {
+
+function g() {
+	return 10;
+}
+
+var func = x();
+	areturn func;
+}
+
+function g() {
+	return 10;
+}
+
+var func = b();
+
+println(eval(">>func();"));
+println(func());

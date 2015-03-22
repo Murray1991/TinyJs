@@ -1,0 +1,11 @@
+var x  = 1;
+function g(z) {
+	return x + z; // 12 + 1
+}
+ 
+function f(y) {
+	var x = y+1; //y=3 => x=4
+	return g(y*x); // y=3 => g(12)
+}
+
+println(f(3)); //13

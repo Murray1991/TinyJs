@@ -1,0 +1,11 @@
+function f() {
+	return 6;
+}
+
+var g = f;
+
+function f() {
+	return 10;
+}
+
+println(eval(">> g();"));

@@ -1,0 +1,67 @@
+function counter(init, pippo) {
+	var c = init;
+	
+	function incr() {
+		c+=1;
+		return c;
+	}
+	
+	function decr() {
+		c -= 1;
+		return c;
+	}
+	
+	function gimme(str) {
+		if (str == 'incr') {
+			return incr;
+		} else if (str == 'decr') {
+			return decr;
+		}
+		
+		return undefined;
+	}
+	
+	function op(code) {
+		
+		if (code == 0) {
+			>> incr();
+		} else if (code == 1) {
+			>> decr();
+		} else {
+			return gimme;
+		}
+		
+		return c;
+	}
+	
+	return op;
+}
+
+function main() {
+	var op = counter(0);
+	println(op(0));
+	println(op(0));
+	println(op(1));
+	println(op(1));
+	println(op(1));
+	println(op(1));
+	println(op(0));
+	println(op(0));
+	println(op(1));
+	println(op(1));
+	println(op(0));
+	
+	op = op(19);
+	var incr = op('incr');
+	var decr = op('decr');
+	println(incr());
+	println(incr());
+	println(incr());
+	println(decr());
+	println(decr());
+	
+	var und = op("unief");
+	println(und); //if und() internal error
+}
+
+>>main();

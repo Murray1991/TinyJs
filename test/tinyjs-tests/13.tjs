@@ -1,0 +1,9 @@
+var x = 5;
+function f() {
+	return x;
+}
+
+println(f());
+x = 4;
+
+println(f());
