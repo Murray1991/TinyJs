@@ -1,44 +1,45 @@
 
 # TinyJs
-TinyJs e' un sottoinsieme di Javascript con un numero limitato di tipi primitivi: 
-booleani, interi, stringhe e funzioni. Variabili senza valore hanno tipo undefined.
+TinyJs is a subset of Javascript with a limited number of primitive types: booleans,
+integers, strings and functions. Variables without value have undefined type.
 
-Le funzioni sono "first-class citiziens", hanno scoping lessicale e possono essere 
-dichiarate all'interno di altre funzioni. Vengono dichiarate attraverso la
-keyword "function".
+Functions are first-class citiziens, they have lexical scoping and can be declared
+inside other functions. Anonymous functions are not implemented in TinyJs. Functions
+are declared using the keyword ```function ```.
 
-Il linguaggio include statements come var, for, while, continue, break e
-return, i quali funzionano in maniera analoga ad altri linguaggi di programmazione. Inoltre
-include le funzioni "eval" e "distributed_eval", le quali valutano il codice TinyJs
-rappresentato come una stringa. La specifica delle due funzioni si trova in PA-feb-15.pdf
+The TinyJs programming language includes typical imperative statements as ```var``` for
+variable declaration, ```for ```, ```while ```, ```switch-case ```, ```continue ```, ```break ``` and ```return ```. They
+work as to other programming languages. Moreover includes built-in functions as
+```eval ``` and ```distributed_eval ``` which evaluate the TinyJs code represented as a string.
+More detailed spec of the two functions is in PA-feb-15.pdf file.
 
-Si consiglia la visione della sezione "Esempi" per una maggiore comprensione del
-linguaggio.
+See Examples section for a slighter better vision and comprehension of the language.
 
-## Uso
-E' necessario avere installato Node.js sulla propria macchina.
-Quindi e' sufficiente portarsi nella directory TinyJs ed eseguire
+## Usage
+In order to use the TinyJs interpreter, ensure that you have Node.js installed in
+your machine. Thus it's sufficient change to the TinyJs directory and execute
 ``` 
 node tinyjs.js --file /path/of/the/file.tjs 
 ```
 
-## Dettagli implementativi
-Il parser e' table-driven LL(1), la grammatica del linguaggio e' descritta in
-./resources/grammar.txt con una notazione piuttosto semplice (una riga per produzione).
+## Something about the implementation
+The parser is a LL(1) table-driven one, the grammar of the language is described in
+```./resources/grammar.txt``` according to the BNF form and using a simple syntax (one
+row for production).
 
-Ad ogni invocazione dell'interprete di TinyJs viene parsato il file grammar.txt e generata
-la parsing table usata dal parser (per dettagli vedere ./lib/grammar.js, piccola libreria che
-ho implementato che calcola gli insiemi first e follow per generare la parsing table ). 
-Il file grammar.txt contiene annotazioni semantiche (action symbols) corrispondenti a procedure 
-semantiche e direttamente invocate dal parser LL(1) quando appaiono nel top del parsing stack. 
-Il parser usa quindi due stack, uno per il parsing (parsing stack) e l'altro (semantic stack)
-necessario per le procedure semantiche quando vengono invocate.
+For each invokation of the interpreter the file ```grammar.txt``` is parsed and the parsing
+table is generated (see ```./lib/grammar.js``` library for details, the library computes the
+FIRST and FOLLOW sets in order to generate the parsing table). The file ```grammar.txt``` is
+enriched by semantic annotations (semantic actions) corresponding to function calls directly 
+invoked by the parser when they appear on the top of the parsing stack. The parser use two 
+stack data structures, one for parsing purposes (the parsing stack) the other (the semantic 
+stack) is needed in order to support the semantic procedures when invoked.
 
-Le annotazioni semantiche nel file hanno la forma di " #something($$,$1,$2, ..,$N) ", in questo 
-caso something e' il nome della procedura semantica associata, $$ indica la entry dello
-stack semantico a left (vedi poi), $1, la entry dello stack semantico a right, $2 a right+1 e
-cosi' via fino ad $N che indica la entry dello stack semantico a right+N-1.
-Per esemplificare, segue l'algoritmo usato (in pseudocodice) del parser:
+The semantic annotations have the form of "#something($$,$1,$2, ..,$N)", where something is
+the name of the associated semantic procedure (invoked through a function call by the interpreter),
+$$ is the entry 'left' of the semantic stack (see the pseudocode), $1 is the entry 'right' of the 
+semantic stack, $2 t the entry 'right+1' and so on until $N, the entry 'right+N-1' of the semantic
+stack. Follows a pseudocode description of the parser:
 
 ```
 	input: a string w and a parsing table M for G
@@ -83,15 +84,14 @@ Per esemplificare, segue l'algoritmo usato (in pseudocodice) del parser:
 				error();
 	until (parseStack is empty)
 ```
-Ogni procedura semantica modifica lo stack semantico, dando maggiori informazioni alle sue
-entry e genera l'abstract-syntax tree, il quale viene interpretato con un approccio
-"recursive-descent" partendo dal nodo radice.
+Each semantic procedure modify the semantic stack, giving more informations to its entries
+and generating the AST, which is interpreted with an a recursive-descent approach starting
+from the node root and calling the interpreter method associated to each node.
 
-## Esempi
-Esempi sono presenti nelle directory ./test/tinyjs-tests e ./test/tinyjs-distr-test che
-contengono programmi accettabili. In ./test/tinyjs-wrong-tests ci sono test con errori, usati
-per verificare la bonta' (per niente buona, a dire il vero) dei messaggi di errore nelle varie
-fasi dell'interprete. Ne segue uno (./test/tinyjs-tests/07.tjs):
+## Examples
+Test examples are present in the directories ```./test/tinyjs-tests/``` and ```./test/tinyjs-distr-test/```
+that contain acceptable programs. In ```./test/tinyjs-wrong-tests/``` are present tests with errors.
+In order to show a little bit of sugar, follows the ```./test/tinyjs-tests/07.tjs``` test:
 
 ``` javascript
 function executor(fun, par) { 
@@ -126,33 +126,33 @@ for ( var k = j(0) ; j(0) < 10; k=j(1) ){
 println(j(0)); //10
 println(i(0)); //30
 ```
-Come si puo' notare dall'esempio il primo compromesso con la scelta di implementare un
-parser LL(1) e' quella di utilizzare una sintassi diversa ('>> expr;') per le espressioni 
-che non sono a destra di un assegnamento o che non sono usate come parametri attuali
-nella chiamata di una funzione. Questo compromesso nasce dal fatto che non volevo complicare
-ulteriormente la grammatica del linguaggio facendo left-factoring sugli identificatori nelle
-produzioni per l'assegnamento e per le espressioni
+The first evident tradeoff with the choice of implementing an LL(1) parser is the one that
+utilizes a different syntax (```>> expr;```) for the expressions that don't appear at the 
+right of an assignment or that are not used as actual parameters in a function call. The
+genesis of this tradeoff is due to the fact that I didn't want complicate too much the
+grammar making left-factoring over the identifiers or complicating the scanner.
 
-## Problemi
-- Il parser LL(1) genera AST che sono right associative. Nonostante la precedenza fra gli
-operatori sia soddisfatta ed io abbia (presumo correttamente) risolto il problema di associativita' 
-per le espressioni addittive in cui sono presenti sottrazioni (facendo 'forwarding del -', vedere 
-implementazione per dettagli), non e' stato risolto il problema per le espressioni moltiplicative.
-Sfortunatamente il programmatore DEVE in caso di divisioni gestire l'associativita' con le parentesi.
-- Il server che gestisce le richieste per la funzione "distributed_eval" e' un semplice server
-costruito sopra Node.js, poiche' e' single-threaded puo' bloccare gli altri client su una 
-richiesta CPU-intensive. Nello scenario peggiore si puo' bloccare per un tempo indefinitivamente
-lungo (per esempio: ```distributed_eval("while(true){};",url)``` );
-- Nella computazione su network, gli unici tipi di dato scambiati sono tipi primitivi.
-- Il server mantiene in modo permanente un ambiente per ogni indirizzo IP, evidente fonte di
-insicurezza.
+## Problems
+- The LL(1) parser generates right-associative ASTs. This "problem" (not really a problem, it's 
+just a different meaning) has been solved for addictive expressions (see the "minus forwarding"
+in the implementation) but NOT for the moltiplicative ones. Unfortunately the programmer
+MUST handle it by himself (of course if he would prefer a left-associative semantics for 
+the moltiplicative expressions), putting brackets where needed.
+
+- The server handling the ```distributed_eval ``` requests is a very simple server built 
+over Node.js, thus it is single-threaded and blocking on CPU-intensive requests. In the worst
+scenario it could be blocked forever on a single request: (e.g. ``` distributed_eval("while(true){};", url); ```)
+
+- In the computation over the network the only exchanged datas are the primitive types ones,
+e.g. no closures are passed.
+
+- The server keeps in a parmanently way an environment for each IP address, clear source of insecurity.
 
 ## TODO list
-- Messaggi di errore piu' significativi.
-- Rendere il server piu' efficiente e non bloccante su richieste CPU-intensive.
-- Risolvere il problema dell'associativita' per le espressioni moltiplicative.
-- Invece di generare la parsing table per ogni invocazione dell'interprete, generarla una sola volta
-e salvarla in un file json in ./resources.
+- Messare errors more meaningful and precise.
+- Make the server efficient and possibly non-blocking on CPU-intensive requests.
+- Solve the "problem" of right-associativity for the moltiplicative expressions.
+- Generate the parsing table once and save it in a file.
 
 ## Ambiente
-Testato su macchina linux e creato con [Nodeclipse](https://github.com/Nodeclipse/nodeclipse-1).
+Tested on Linux and made with [Nodeclipse](https://github.com/Nodeclipse/nodeclipse-1).
